@@ -154,8 +154,10 @@ struct private_handle_t : public native_handle_t {
   unsigned int custom_content_md_reserved_size;
   static const int kNumFds = 2;
   static const int kMagic = 'gmsm';
+#ifdef HAS_SUPPORT_FOR_UBWCP_FORMAT
   unsigned int linear_size;
   int ubwcp_format;
+#endif
 
   static inline int NumInts() {
     return ((sizeof(private_handle_t) - sizeof(native_handle_t)) / sizeof(int)) - kNumFds;
@@ -183,8 +185,10 @@ struct private_handle_t : public native_handle_t {
         base_metadata(0),
         gpuaddr(0),
         reserved_size(0),
+#ifdef HAS_SUPPORT_FOR_UBWCP_FORMAT
         linear_size(0),
         ubwcp_format(format),
+#endif
         custom_content_md_reserved_size(0) {
     version = static_cast<int>(sizeof(native_handle));
     numInts = NumInts();
